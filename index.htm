@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Sporty Hero</title>
+    <title>Sporty Hero - SportyBet</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -16,13 +16,14 @@
             theme: {
                 extend: {
                     colors: {
+                        sportyRed: '#e60012',
+                        sportyRedHover: '#cc0010',
                         sportyDark: '#121212',
                         sportyCard: '#1e1e1e',
                         sportyDarker: '#0a0a0a',
                         sportyGreen: '#00b050',
                         sportyGreenHover: '#009643',
-                        sportyGold: '#ffcc00',
-                        sportyRed: '#ff3b30'
+                        sportyGold: '#ffcc00'
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -61,168 +62,102 @@
             animation: floatHero 4s infinite ease-in-out;
         }
         .glass-card {
-            background: rgba(20, 20, 20, 0.85);
+            background: rgba(30, 30, 30, 0.85);
             backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
     </style>
 </head>
 <body class="h-full flex justify-center items-center bg-[#0a0a0a] text-white">
 
     <!-- Mobile App Container Frame -->
-    <div id="app-container" class="w-full max-w-md h-full md:h-[90vh] md:rounded-3xl bg-sportyDark flex flex-col relative overflow-hidden shadow-2xl border border-gray-800">
+    <div id="app-container" class="w-full max-w-md h-full md:h-[95vh] md:rounded-3xl bg-sportyDark flex flex-col relative overflow-hidden shadow-2xl border border-gray-800">
         
-        <!-- Top Navigation Bar -->
-        <header class="bg-[#181818] px-4 py-3 flex items-center justify-between border-b border-gray-800 z-30 shrink-0">
-            <div class="flex items-center space-x-3">
-                <button onclick="switchTab('home')" class="text-gray-300 hover:text-white text-lg p-1">
+        <!-- Top Navigation Bar (SportyBet Red Header) -->
+        <header class="bg-sportyRed px-4 py-3 flex items-center justify-between border-b border-red-700 z-30 shrink-0 shadow-md">
+            <div class="flex items-center space-x-2">
+                <button onclick="switchTab('home')" class="text-white hover:text-gray-200 text-lg p-1">
                     <i class="fa-solid fa-chevron-left"></i>
                 </button>
-                <div class="flex items-center bg-black/50 border border-gray-700 rounded-full px-3 py-1">
-                    <span class="text-xs text-sportyGold font-semibold mr-1">GHS</span>
-                    <span id="user-balance" class="text-sm font-bold text-white tracking-wide">1,500.00</span>
+                <div class="flex items-center bg-black/30 border border-white/20 rounded-full px-2.5 py-0.5">
+                    <span class="text-[10px] text-sportyGold font-bold mr-1">GHS</span>
+                    <span id="user-balance" class="text-xs font-black text-white tracking-wide">0.00</span>
                 </div>
             </div>
 
             <!-- Logo Title -->
             <div class="text-center">
-                <h1 class="font-black italic text-lg tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 drop-shadow">
-                    SPORTY HERO
+                <h1 class="font-black italic text-lg tracking-wider text-white drop-shadow">
+                    SportyBet
                 </h1>
             </div>
 
-            <div class="flex items-center space-x-3">
-                <button onclick="openAuthModal('login')" class="text-xs bg-sportyGreen/20 text-sportyGreen border border-sportyGreen px-2.5 py-1 rounded-full font-bold hover:bg-sportyGreen hover:text-white transition">
-                    Login
+            <div class="flex items-center space-x-2">
+                <button onclick="switchTab('deposit')" class="bg-white text-sportyRed font-black px-2.5 py-1 rounded-md text-xs uppercase shadow hover:bg-gray-100">
+                    Deposit
                 </button>
-                <button onclick="toggleMenu()" class="text-gray-300 hover:text-white p-1">
+                <button onclick="toggleMenu()" class="text-white hover:text-gray-200 p-1">
                     <i class="fa-solid fa-bars text-xl"></i>
                 </button>
             </div>
         </header>
 
         <!-- Slide-out Menu Modal -->
-        <div id="side-menu" class="absolute inset-0 bg-black/80 z-50 transform -translate-x-full transition-transform duration-300 flex flex-col">
-            <div class="p-4 bg-[#181818] flex items-center justify-between border-b border-gray-800">
-                <h2 class="font-bold text-lg text-sportyGold"><i class="fa-solid fa-shield-halved mr-2"></i> Menu</h2>
-                <button onclick="toggleMenu()" class="text-gray-400 hover:text-white text-xl p-2"><i class="fa-solid fa-xmark"></i></button>
+        <div id="side-menu" class="absolute inset-0 bg-black/85 z-50 transform -translate-x-full transition-transform duration-300 flex flex-col">
+            <div class="p-4 bg-sportyRed flex items-center justify-between border-b border-red-700">
+                <h2 class="font-bold text-lg text-white"><i class="fa-solid fa-shield-halved mr-2"></i> Sporty Menu</h2>
+                <button onclick="toggleMenu()" class="text-white hover:text-gray-200 text-xl p-2"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="p-4 flex-1 space-y-3 overflow-y-auto">
-                <button onclick="switchTab('home'); toggleMenu();" class="w-full text-left py-3 px-4 bg-[#222] rounded-xl font-semibold flex items-center justify-between hover:bg-[#333]">
+            <div class="p-4 flex-1 space-y-3 overflow-y-auto bg-sportyDark">
+                <button onclick="switchTab('home'); toggleMenu();" class="w-full text-left py-3 px-4 bg-[#1e1e1e] rounded-xl font-semibold flex items-center justify-between hover:bg-[#282828] border border-gray-800">
                     <span><i class="fa-solid fa-gamepad text-sportyGreen mr-3"></i> Sporty Hero Game</span>
                     <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
                 </button>
-                <button onclick="switchTab('deposit'); toggleMenu();" class="w-full text-left py-3 px-4 bg-[#222] rounded-xl font-semibold flex items-center justify-between hover:bg-[#333]">
+                <button onclick="switchTab('deposit'); toggleMenu();" class="w-full text-left py-3 px-4 bg-[#1e1e1e] rounded-xl font-semibold flex items-center justify-between hover:bg-[#282828] border border-gray-800">
                     <span><i class="fa-solid fa-wallet text-sportyGold mr-3"></i> Deposit Funds</span>
                     <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
                 </button>
-                <button onclick="switchTab('withdrawal'); toggleMenu();" class="w-full text-left py-3 px-4 bg-[#222] rounded-xl font-semibold flex items-center justify-between hover:bg-[#333]">
+                <button onclick="switchTab('withdrawal'); toggleMenu();" class="w-full text-left py-3 px-4 bg-[#1e1e1e] rounded-xl font-semibold flex items-center justify-between hover:bg-[#282828] border border-gray-800">
                     <span><i class="fa-solid fa-money-bill-transfer text-blue-400 mr-3"></i> Withdraw Earnings</span>
                     <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
                 </button>
-                <button onclick="openAuthModal('login'); toggleMenu();" class="w-full text-left py-3 px-4 bg-[#222] rounded-xl font-semibold flex items-center justify-between hover:bg-[#333]">
-                    <span><i class="fa-solid fa-right-to-bracket text-sportyGreen mr-3"></i> Account Login</span>
-                    <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
-                </button>
-                <button onclick="openAuthModal('register'); toggleMenu();" class="w-full text-left py-3 px-4 bg-[#222] rounded-xl font-semibold flex items-center justify-between hover:bg-[#333]">
-                    <span><i class="fa-solid fa-user-plus text-sportyGold mr-3"></i> Register Account</span>
+                <button onclick="switchTab('open-bets'); toggleMenu();" class="w-full text-left py-3 px-4 bg-[#1e1e1e] rounded-xl font-semibold flex items-center justify-between hover:bg-[#282828] border border-gray-800">
+                    <span><i class="fa-solid fa-ticket text-orange-400 mr-3"></i> Open Bets & History</span>
                     <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
                 </button>
                 <div class="pt-4 border-t border-gray-800">
                     <p class="text-xs text-gray-500 uppercase tracking-wider mb-2 font-bold">Admin Portal</p>
-                    <button onclick="switchTab('admin'); toggleMenu();" class="w-full text-left py-3 px-4 bg-gradient-to-r from-red-900/60 to-purple-900/60 border border-red-700/50 rounded-xl font-semibold flex items-center justify-between hover:border-red-500">
+                    <button onclick="switchTab('admin'); toggleMenu();" class="w-full text-left py-3 px-4 bg-gradient-to-r from-red-950 to-purple-950 border border-red-700 rounded-xl font-semibold flex items-center justify-between hover:border-red-500">
                         <span><i class="fa-solid fa-user-secret text-red-400 mr-3"></i> Super Admin (Hacker Link)</span>
                         <span class="text-xs bg-red-600 text-white px-2 py-0.5 rounded font-mono">SECURE</span>
                     </button>
                 </div>
             </div>
-            <div class="p-4 text-center text-xs text-gray-500 border-t border-gray-800">
-                Sporty Hero v2.6.4 • Licensed & Regulated
-            </div>
-        </div>
-
-        <!-- Glassy Auth Modal (Login / Register) -->
-        <div id="auth-modal" class="absolute inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
-            <div class="w-full max-w-sm glass-card p-6 rounded-3xl relative border border-gray-700 shadow-2xl">
-                <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
-                
-                <!-- Login View -->
-                <div id="auth-login-view" class="space-y-4">
-                    <div class="text-center mb-4">
-                        <h2 class="text-2xl font-black text-white">Welcome back</h2>
-                        <p class="text-xs text-gray-400 mt-1">Sign in to your Sporty Hero account</p>
-                    </div>
-                    <div>
-                        <label class="text-xs text-gray-400 block mb-1">Email or Phone Number</label>
-                        <input type="text" id="login-identifier" value="0541799703" class="w-full bg-black/60 border border-gray-700 rounded-xl p-3 text-white text-sm focus:outline-none focus:border-sportyGreen font-mono">
-                    </div>
-                    <div>
-                        <label class="text-xs text-gray-400 block mb-1">Password</label>
-                        <input type="password" id="login-password" value="Addo1234" class="w-full bg-black/60 border border-gray-700 rounded-xl p-3 text-white text-sm focus:outline-none focus:border-sportyGreen font-mono">
-                    </div>
-                    <div class="flex items-center justify-between text-xs text-gray-400">
-                        <label class="flex items-center cursor-pointer">
-                            <input type="checkbox" checked class="mr-2 rounded accent-sportyGreen"> Remember me
-                        </label>
-                        <a href="#" class="text-sportyGreen hover:underline">Forgot?</a>
-                    </div>
-                    <button onclick="performUserLogin()" class="w-full bg-sportyGreen hover:bg-sportyGreenHover text-white font-extrabold py-3.5 rounded-xl shadow-lg transition text-sm uppercase tracking-wider">
-                        Sign In
-                    </button>
-                    <p class="text-center text-xs text-gray-400 pt-2">
-                        Don't have an account? <button onclick="switchAuthView('register')" class="text-sportyGreen font-bold hover:underline">Register</button>
-                    </p>
-                </div>
-
-                <!-- Register View -->
-                <div id="auth-register-view" class="space-y-4 hidden">
-                    <div class="text-center mb-4">
-                        <h2 class="text-2xl font-black text-white">Create Account</h2>
-                        <p class="text-xs text-gray-400 mt-1">Join Sporty Hero & claim bonuses</p>
-                    </div>
-                    <div>
-                        <label class="text-xs text-gray-400 block mb-1">Phone Number</label>
-                        <input type="text" placeholder="0500000000" class="w-full bg-black/60 border border-gray-700 rounded-xl p-3 text-white text-sm focus:outline-none focus:border-sportyGreen">
-                    </div>
-                    <div>
-                        <label class="text-xs text-gray-400 block mb-1">Create Password</label>
-                        <input type="password" placeholder="••••••••" class="w-full bg-black/60 border border-gray-700 rounded-xl p-3 text-white text-sm focus:outline-none focus:border-sportyGreen">
-                    </div>
-                    <button onclick="performUserRegister()" class="w-full bg-sportyGold hover:bg-yellow-400 text-black font-extrabold py-3.5 rounded-xl shadow-lg transition text-sm uppercase tracking-wider">
-                        Register Now
-                    </button>
-                    <p class="text-center text-xs text-gray-400 pt-2">
-                        Already have an account? <button onclick="switchAuthView('login')" class="text-sportyGold font-bold hover:underline">Sign In</button>
-                    </p>
-                </div>
+            <div class="p-4 text-center text-xs text-gray-500 border-t border-gray-800 bg-sportyDark">
+                SportyBet Ghana • Official App v3.2
             </div>
         </div>
 
         <!-- MAIN APP CONTENT AREA -->
-        <main id="main-content" class="flex-1 flex flex-col overflow-y-auto relative">
+        <main id="main-content" class="flex-1 flex flex-col overflow-y-auto relative bg-sportyDark">
             
-            <!-- TAB 1: HOME / GAME SCREEN -->
+            <!-- TAB 1: HOME / SPORTY HERO GAME SCREEN -->
             <div id="tab-home" class="flex flex-col flex-1 pb-16">
                 
                 <!-- Multiplier Pills Bar -->
                 <div class="bg-[#181818] px-2 py-2 flex items-center space-x-2 overflow-x-auto no-scrollbar shrink-0 border-b border-gray-800" id="pills-bar">
-                    <div class="px-2.5 py-1 bg-[#242424] text-gray-300 text-xs font-bold rounded-md shrink-0 border border-gray-700">1.43x</div>
+                    <div class="px-2.5 py-1 bg-[#242424] text-gray-300 text-xs font-bold rounded-md shrink-0 border border-gray-700">1.75x</div>
                     <div class="px-2.5 py-1 bg-[#242424] text-sportyGreen text-xs font-bold rounded-md shrink-0 border border-gray-700">2.04x</div>
+                    <div class="px-2.5 py-1 bg-[#242424] text-sportyGold text-xs font-bold rounded-md shrink-0 border border-gray-700">13.91x</div>
                     <div class="px-2.5 py-1 bg-[#242424] text-gray-300 text-xs font-bold rounded-md shrink-0 border border-gray-700">1.05x</div>
-                    <div class="px-2.5 py-1 bg-[#242424] text-sportyGold text-xs font-bold rounded-md shrink-0 border border-gray-700">15.68x</div>
-                    <div class="px-2.5 py-1 bg-[#242424] text-gray-300 text-xs font-bold rounded-md shrink-0 border border-gray-700">1.14x</div>
-                    <div class="px-2.5 py-1 bg-[#242424] text-sportyRed text-xs font-bold rounded-md shrink-0 border border-gray-700">1.00x</div>
                 </div>
 
-                <!-- Live Win Ticker Banner -->
-                <div class="bg-gradient-to-r from-yellow-900/50 via-yellow-800/30 to-yellow-900/50 border-y border-yellow-600/30 px-3 py-1.5 flex items-center justify-between text-xs shrink-0">
+                <!-- Game Status Banner -->
+                <div class="bg-gradient-to-r from-red-950 via-red-900/60 to-red-950 border-y border-red-700/40 px-3 py-1.5 flex items-center justify-between text-xs shrink-0">
                     <div class="flex items-center space-x-2 truncate">
-                        <i class="fa-solid fa-trophy text-sportyGold animate-bounce"></i>
-                        <span id="ticker-text" class="truncate text-yellow-200 font-medium">c**h won the Mega Jackpot of GHS 11,011.24!</span>
+                        <i class="fa-solid fa-bolt text-sportyGold animate-bounce"></i>
+                        <span id="ticker-text" class="truncate text-yellow-200 font-medium">SPORTY HERO: Mega Jackpot GHS 11,011.24 Active!</span>
                     </div>
-                    <button onclick="triggerJackpotModal()" class="bg-sportyGold text-black font-extrabold px-2 py-0.5 rounded text-[10px] uppercase tracking-wider shrink-0 ml-2 hover:bg-yellow-300 shadow">Play Now!</button>
                 </div>
 
                 <!-- Game Visual Screen -->
@@ -231,9 +166,9 @@
                         <div class="absolute top-4 left-10 w-1 h-1 bg-white rounded-full animate-ping"></div>
                         <div class="absolute top-12 right-24 w-12 h-12 bg-gray-400/20 rounded-full blur-[1px]"></div>
                         <div class="absolute bottom-8 left-1/4 w-1 h-1 bg-white rounded-full"></div>
-                        <div class="absolute top-20 right-1/3 w-1 h-1 bg-blue-200 rounded-full animate-pulse"></div>
                     </div>
 
+                    <!-- Superhero Flying Character -->
                     <div id="hero-character" class="absolute top-6 right-16 hero-float transition-all duration-300">
                         <div class="relative">
                             <div class="w-20 h-20 rounded-full bg-gradient-to-tr from-red-600 via-orange-500 to-yellow-400 p-0.5 shadow-2xl flex items-center justify-center">
@@ -246,16 +181,16 @@
                     </div>
 
                     <div class="z-10 text-center mt-4">
-                        <div id="game-status-label" class="text-xs uppercase tracking-widest text-sportyGold font-bold mb-1">Ready for Takeoff</div>
+                        <div id="game-status-label" class="text-xs uppercase tracking-widest text-sportyGold font-bold mb-1">POWERING UP FOR NEXT ROUND</div>
                         <div id="multiplier-display" class="text-5xl font-black tracking-wider text-white multiplier-glow">1.00x</div>
                     </div>
 
-                    <div id="hacker-active-indicator" class="absolute bottom-2 left-2 bg-red-950/80 border border-red-600 text-red-300 text-[10px] px-2 py-0.5 rounded font-mono hidden">
+                    <div id="hacker-active-indicator" class="absolute bottom-2 left-2 bg-red-950/85 border border-red-600 text-red-300 text-[10px] px-2 py-0.5 rounded font-mono hidden">
                         <i class="fa-solid fa-satellite-dish mr-1"></i> Hacker Target: <span id="hacker-target-val">--</span>x
                     </div>
                 </div>
 
-                <!-- Game Tabs -->
+                <!-- Game Mode Tabs -->
                 <div class="bg-[#181818] border-b border-gray-800 flex justify-around text-xs font-bold text-gray-400 py-2 shrink-0">
                     <button class="text-sportyGreen border-b-2 border-sportyGreen pb-1 px-4">Classic</button>
                     <button class="hover:text-white pb-1 px-4">O/U</button>
@@ -271,12 +206,12 @@
                                 <label class="flex items-center cursor-pointer">
                                     <span class="mr-1.5">Auto Bet</span>
                                     <input type="checkbox" id="autobet-1" class="sr-only peer">
-                                    <div class="w-8 h-4 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-sportyGreen relative"></div>
+                                    <div class="w-8 h-4 bg-gray-700 rounded-full peer peer-checked:bg-sportyGreen relative"></div>
                                 </label>
                                 <label class="flex items-center cursor-pointer">
                                     <span class="mr-1.5">Auto Cashout</span>
                                     <input type="checkbox" id="autocash-1" checked class="sr-only peer">
-                                    <div class="w-8 h-4 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-sportyGreen relative"></div>
+                                    <div class="w-8 h-4 bg-gray-700 rounded-full peer peer-checked:bg-sportyGreen relative"></div>
                                 </label>
                             </div>
                             <span class="text-[11px] text-gray-500">Min: 0.1 | Max: 5000</span>
@@ -309,12 +244,12 @@
                                 <label class="flex items-center cursor-pointer">
                                     <span class="mr-1.5">Auto Bet</span>
                                     <input type="checkbox" id="autobet-2" class="sr-only peer">
-                                    <div class="w-8 h-4 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-sportyGreen relative"></div>
+                                    <div class="w-8 h-4 bg-gray-700 rounded-full peer peer-checked:bg-sportyGreen relative"></div>
                                 </label>
                                 <label class="flex items-center cursor-pointer">
                                     <span class="mr-1.5">Auto Cashout</span>
                                     <input type="checkbox" id="autocash-2" checked class="sr-only peer">
-                                    <div class="w-8 h-4 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-sportyGreen relative"></div>
+                                    <div class="w-8 h-4 bg-gray-700 rounded-full peer peer-checked:bg-sportyGreen relative"></div>
                                 </label>
                             </div>
                             <span class="text-[11px] text-gray-500">Min: 0.1 | Max: 5000</span>
@@ -341,140 +276,180 @@
                     </div>
                 </div>
 
-                <!-- Bottom Tables -->
+                <!-- Bottom Bets Table -->
                 <div class="bg-[#181818] border-t border-gray-800 mt-2">
                     <div class="flex border-b border-gray-800 text-xs font-bold text-gray-400">
-                        <button onclick="switchTableTab('all')" id="tbl-tab-all" class="flex-1 py-2.5 text-center text-sportyGreen border-b-2 border-sportyGreen bg-[#222]">All Bets</button>
+                        <button onclick="switchTableTab('all')" id="tbl-tab-all" class="flex-1 py-2.5 text-center text-sportyGreen border-b-2 border-sportyGreen bg-[#222]">All Bets (235)</button>
                         <button onclick="switchTableTab('my')" id="tbl-tab-my" class="flex-1 py-2.5 text-center hover:text-white">My Bets</button>
                         <button onclick="switchTableTab('top')" id="tbl-tab-top" class="flex-1 py-2.5 text-center hover:text-white">Top Wins</button>
                     </div>
                     <div id="table-content-area" class="p-3 text-xs">
                         <div class="space-y-2" id="all-bets-list">
                             <div class="flex justify-between items-center text-gray-400 pb-1 border-b border-gray-800 font-semibold text-[11px]">
-                                <span>User</span><span>Bet</span><span>Coeff</span><span>Win</span>
+                                <span>Name</span><span>Bet</span><span>Coeff</span><span>Win</span>
                             </div>
-                            <div class="flex justify-between items-center text-gray-300">
-                                <span class="truncate w-20">Kofi_99</span><span>GHS 50.00</span><span class="text-sportyGreen font-bold">2.45x</span><span class="text-sportyGold font-bold">GHS 122.50</span>
+                            <div class="flex justify-between items-center text-gray-300 py-1 border-b border-gray-800/40">
+                                <span class="truncate w-20">m***m</span><span>100</span><span class="text-gray-500">-</span><span class="text-gray-400">0</span>
                             </div>
-                            <div class="flex justify-between items-center text-gray-300">
-                                <span class="truncate w-20">Hero_King</span><span>GHS 200.00</span><span class="text-sportyGreen font-bold">12.10x</span><span class="text-sportyGold font-bold">GHS 2,420.00</span>
+                            <div class="flex justify-between items-center text-gray-300 py-1 border-b border-gray-800/40">
+                                <span class="truncate w-20">5***4</span><span>97</span><span class="text-gray-500">-</span><span class="text-gray-400">0</span>
+                            </div>
+                            <div class="flex justify-between items-center text-gray-300 py-1">
+                                <span class="truncate w-20">D***0</span><span>50</span><span class="text-gray-500">-</span><span class="text-gray-400">0</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- TAB 2: DEPOSIT PAGE -->
+            <!-- TAB 2: DEPOSIT PAGE (Exact SportyBet Style) -->
             <div id="tab-deposit" class="flex flex-col flex-1 p-4 bg-sportyDark hidden">
-                <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center justify-between mb-4 pb-2 border-b border-gray-800">
                     <h2 class="text-lg font-bold text-sportyGold"><i class="fa-solid fa-wallet mr-2"></i> Deposit Funds</h2>
                     <button onclick="switchTab('home')" class="text-gray-400 hover:text-white text-sm"><i class="fa-solid fa-xmark text-lg"></i></button>
                 </div>
-                <div class="bg-[#1e1e1e] p-4 rounded-2xl border border-gray-800 mb-4">
-                    <p class="text-xs text-gray-400 mb-1">Current Balance</p>
-                    <p id="deposit-current-bal" class="text-2xl font-black text-sportyGold">GHS 1,500.00</p>
+
+                <div class="bg-[#1e1e1e] p-3 rounded-xl border border-gray-800 mb-3 text-xs text-yellow-200/90 leading-relaxed">
+                    <i class="fa-solid fa-circle-exclamation text-sportyGold mr-1"></i> Accounts verified with a Ghana ID or voter ID can deposit using multiple phone numbers. Tap "Switch" below to get started!
                 </div>
+
+                <div class="bg-[#1e1e1e] p-4 rounded-2xl border border-gray-800 mb-4 space-y-3">
+                    <div class="flex justify-between items-center bg-black/40 p-3 rounded-xl border border-gray-700">
+                        <span class="text-xs text-gray-400">+233 53****223</span>
+                        <span class="text-xs text-sportyGreen font-bold cursor-pointer">Switch ></span>
+                    </div>
+                    <div class="flex justify-between items-center bg-black/40 p-3 rounded-xl border border-gray-700">
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-mobile-screen text-sportyGreen"></i>
+                            <span class="text-xs font-bold text-white">MTN Mobile Money</span>
+                        </div>
+                        <span class="text-xs text-sportyGreen font-bold cursor-pointer">Switch ></span>
+                    </div>
+                </div>
+
                 <div class="space-y-4 flex-1">
                     <div>
-                        <label class="text-xs text-gray-400 block mb-1">Select Payment Method</label>
-                        <div class="grid grid-cols-3 gap-2">
-                            <button class="p-3 bg-[#252525] border-2 border-sportyGreen rounded-xl text-center font-bold text-xs flex flex-col items-center justify-center space-y-1">
-                                <i class="fa-solid fa-mobile-screen text-sportyGreen text-lg"></i>
-                                <span>MTN MoMo</span>
-                            </button>
-                            <button class="p-3 bg-[#252525] border border-gray-700 rounded-xl text-center font-bold text-xs flex flex-col items-center justify-center space-y-1">
-                                <i class="fa-solid fa-credit-card text-blue-400 text-lg"></i>
-                                <span>Bank Card</span>
-                            </button>
-                            <button class="p-3 bg-[#252525] border border-gray-700 rounded-xl text-center font-bold text-xs flex flex-col items-center justify-center space-y-1">
-                                <i class="fa-solid fa-building-columns text-orange-400 text-lg"></i>
-                                <span>Vodafone Cash</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="text-xs text-gray-400 block mb-1">Deposit Amount (GHS)</label>
+                        <label class="text-xs text-gray-400 block mb-1">Amount (GHS) <span class="text-gray-500 float-right">min. 1.00</span></label>
                         <input type="number" id="deposit-amount-input" value="100.00" class="w-full bg-black/50 border border-gray-700 rounded-xl p-3 text-white font-bold focus:outline-none focus:border-sportyGreen">
                     </div>
-                    <div class="flex space-x-2">
-                        <button onclick="setDepositAmt(50)" class="flex-1 bg-[#252525] py-2 rounded-lg text-xs font-bold border border-gray-700 hover:bg-[#333]">50 GHS</button>
-                        <button onclick="setDepositAmt(100)" class="flex-1 bg-[#252525] py-2 rounded-lg text-xs font-bold border border-gray-700 hover:bg-[#333]">100 GHS</button>
-                        <button onclick="setDepositAmt(500)" class="flex-1 bg-[#252525] py-2 rounded-lg text-xs font-bold border border-gray-700 hover:bg-[#333]">500 GHS</button>
-                        <button onclick="setDepositAmt(1000)" class="flex-1 bg-[#252525] py-2 rounded-lg text-xs font-bold border border-gray-700 hover:bg-[#333]">1000 GHS</button>
+
+                    <div class="grid grid-cols-5 gap-1.5">
+                        <button onclick="setDepositAmt(2)" class="bg-[#252525] py-2 rounded-lg text-xs font-bold border border-gray-700">+2</button>
+                        <button onclick="setDepositAmt(5)" class="bg-[#252525] py-2 rounded-lg text-xs font-bold border border-gray-700">+5</button>
+                        <button onclick="setDepositAmt(10)" class="bg-[#252525] py-2 rounded-lg text-xs font-bold border border-gray-700">+10</button>
+                        <button onclick="setDepositAmt(50)" class="bg-[#252525] py-2 rounded-lg text-xs font-bold border border-gray-700">+50</button>
+                        <button onclick="setDepositAmt(100)" class="bg-[#252525] py-2 rounded-lg text-xs font-bold border border-gray-700">+100</button>
                     </div>
+
                     <button onclick="processDeposit()" class="w-full bg-sportyGreen hover:bg-sportyGreenHover text-white font-extrabold py-3.5 rounded-xl shadow-lg transition-all text-sm uppercase tracking-wider mt-4">
-                        Proceed to Deposit
+                        Top Up Now
                     </button>
+
+                    <div class="text-[11px] text-gray-500 space-y-1 mt-4 pt-3 border-t border-gray-800">
+                        <p>1. Maximum per transaction is GHS 100,000.00.</p>
+                        <p>2. Minimum per transaction is GHS 1.00.</p>
+                        <p>3. SportyBet does not charge any fees on deposits.</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- TAB 3: WITHDRAWAL PAGE -->
+            <!-- TAB 3: WITHDRAWAL PAGE (Exact SportyBet Style) -->
             <div id="tab-withdrawal" class="flex flex-col flex-1 p-4 bg-sportyDark hidden">
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-lg font-bold text-blue-400"><i class="fa-solid fa-money-bill-transfer mr-2"></i> Withdraw Earnings</h2>
+                <div class="flex items-center justify-between mb-4 pb-2 border-b border-gray-800">
+                    <h2 class="text-lg font-bold text-sportyRed"><i class="fa-solid fa-money-bill-transfer mr-2"></i> Withdraw Earnings</h2>
                     <button onclick="switchTab('home')" class="text-gray-400 hover:text-white text-sm"><i class="fa-solid fa-xmark text-lg"></i></button>
                 </div>
-                <div class="bg-[#1e1e1e] p-4 rounded-2xl border border-gray-800 mb-4">
-                    <p class="text-xs text-gray-400 mb-1">Withdrawable Balance</p>
-                    <p id="withdraw-current-bal" class="text-2xl font-black text-white">GHS 1,500.00</p>
+
+                <div class="bg-[#1e1e1e] p-4 rounded-2xl border border-gray-800 mb-4 space-y-3">
+                    <div class="flex justify-between items-center bg-black/40 p-3 rounded-xl border border-gray-700">
+                        <span class="text-xs text-gray-400">+233 53****223</span>
+                    </div>
+                    <div class="flex justify-between items-center bg-black/40 p-3 rounded-xl border border-gray-700">
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-mobile-screen text-sportyGreen"></i>
+                            <span class="text-xs font-bold text-white">MTN Mobile Money</span>
+                        </div>
+                        <span class="text-xs text-sportyGreen font-bold cursor-pointer">Switch ></span>
+                    </div>
+                    <div class="flex justify-between items-center text-xs text-gray-400 pt-1">
+                        <span>Balance (GHS) <span id="withdraw-bal-1" class="text-white font-bold">0.00</span></span>
+                        <span>Withdrawable (GHS) <span id="withdraw-bal-2" class="text-sportyGold font-bold">0.00</span></span>
+                    </div>
                 </div>
+
                 <div class="space-y-4 flex-1">
                     <div>
-                        <label class="text-xs text-gray-400 block mb-1">Withdrawal Method</label>
-                        <select class="w-full bg-black/50 border border-gray-700 rounded-xl p-3 text-white font-bold focus:outline-none focus:border-blue-400 text-sm">
-                            <option>MTN Mobile Money (****8921)</option>
-                            <option>Vodafone Cash (****4412)</option>
-                            <option>Bank Transfer (GCB Bank)</option>
-                        </select>
+                        <label class="text-xs text-gray-400 block mb-1">Amount (GHS) <span class="text-gray-500 float-right">min. 1.00</span></label>
+                        <input type="number" id="withdraw-amount-input" value="50.00" class="w-full bg-black/50 border border-gray-700 rounded-xl p-3 text-white font-bold focus:outline-none focus:border-sportyRed">
                     </div>
-                    <div>
-                        <label class="text-xs text-gray-400 block mb-1">Amount to Withdraw (GHS)</label>
-                        <input type="number" id="withdraw-amount-input" value="200.00" class="w-full bg-black/50 border border-gray-700 rounded-xl p-3 text-white font-bold focus:outline-none focus:border-blue-400">
-                    </div>
-                    <button onclick="processWithdrawal()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-extrabold py-3.5 rounded-xl shadow-lg transition-all text-sm uppercase tracking-wider mt-4">
-                        Confirm Withdrawal
+
+                    <button onclick="processWithdrawal()" class="w-full bg-sportyRed hover:bg-sportyRedHover text-white font-extrabold py-3.5 rounded-xl shadow-lg transition-all text-sm uppercase tracking-wider mt-4">
+                        Withdraw
                     </button>
+
+                    <div class="text-[11px] text-gray-500 space-y-1 mt-4 pt-3 border-t border-gray-800">
+                        <p>1. Maximum per transaction is GHS 100,000.00.</p>
+                        <p>2. Minimum per transaction is GHS 1.00.</p>
+                        <p>3. Withdrawal is free, no transaction fees.</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- TAB 4: SUPER ADMIN DASHBOARD & LOGIN -->
+            <!-- TAB 4: OPEN BETS & HISTORY -->
+            <div id="tab-open-bets" class="flex flex-col flex-1 p-4 bg-sportyDark hidden">
+                <div class="flex items-center justify-between mb-4 pb-2 border-b border-gray-800">
+                    <h2 class="text-lg font-bold text-sportyGold"><i class="fa-solid fa-ticket mr-2"></i> Open Bets & History</h2>
+                    <button onclick="switchTab('home')" class="text-gray-400 hover:text-white text-sm"><i class="fa-solid fa-xmark text-lg"></i></button>
+                </div>
+                <div class="flex space-x-2 mb-4">
+                    <button class="flex-1 bg-sportyRed text-white py-2 rounded-xl text-xs font-bold">Open Bets (0)</button>
+                    <button class="flex-1 bg-[#1e1e1e] text-gray-400 py-2 rounded-xl text-xs font-bold border border-gray-800">Bet History</button>
+                </div>
+                <div class="bg-[#1e1e1e] p-8 rounded-2xl border border-gray-800 text-center my-auto space-y-3">
+                    <i class="fa-solid fa-receipt text-4xl text-gray-600"></i>
+                    <p class="text-sm font-semibold text-gray-300">No active tickets available</p>
+                    <p class="text-xs text-gray-500">Place bets on Sporty Hero or football matches to view them here.</p>
+                </div>
+            </div>
+
+            <!-- TAB 5: SUPER ADMIN DASHBOARD & LOGIN (Glassy Dark UI) -->
             <div id="tab-admin" class="flex flex-col flex-1 p-4 bg-[#0d0d0d] hidden">
                 <div class="flex items-center justify-between mb-4 pb-2 border-b border-red-900/50">
                     <div class="flex items-center space-x-2">
                         <i class="fa-solid fa-user-secret text-red-500 text-xl"></i>
-                        <h2 class="text-lg font-black text-red-400 tracking-wider">SUPER ADMIN LOGIN</h2>
+                        <h2 class="text-lg font-black text-red-400 tracking-wider">SUPER ADMIN PORTAL</h2>
                     </div>
                     <button onclick="switchTab('home')" class="text-gray-400 hover:text-white text-sm"><i class="fa-solid fa-xmark text-lg"></i></button>
                 </div>
 
-                <!-- Glassy Admin Login Form -->
-                <div id="admin-login-box" class="glass-card p-6 rounded-3xl space-y-4 my-auto border border-red-900/40">
+                <!-- Admin Login Box -->
+                <div id="admin-login-box" class="glass-card p-5 rounded-2xl shadow-xl space-y-4 my-auto">
                     <div class="text-center mb-2">
                         <div class="w-12 h-12 bg-red-950/80 border border-red-600 rounded-full flex items-center justify-center mx-auto mb-2 text-red-400">
                             <i class="fa-solid fa-lock text-lg"></i>
                         </div>
-                        <h3 class="font-bold text-white text-sm">Restricted Access</h3>
-                        <p class="text-xs text-gray-400">Enter Super Admin credentials (0541799703 / Addo1234)</p>
+                        <h3 class="font-bold text-white text-sm">Super Admin Authentication</h3>
+                        <p class="text-xs text-gray-400">Enter phone number and password to access Hacker Link</p>
                     </div>
 
                     <div>
-                        <label class="text-xs text-gray-400 block mb-1">Phone Number</label>
+                        <label class="text-xs text-gray-400 block mb-1 font-semibold">Phone Number</label>
                         <input type="text" id="admin-phone" value="0541799703" class="w-full bg-black/60 border border-gray-700 rounded-xl p-3 text-white font-mono text-sm focus:outline-none focus:border-red-500">
                     </div>
 
                     <div>
-                        <label class="text-xs text-gray-400 block mb-1">Password</label>
+                        <label class="text-xs text-gray-400 block mb-1 font-semibold">Password</label>
                         <input type="password" id="admin-pass" value="Addo1234" class="w-full bg-black/60 border border-gray-700 rounded-xl p-3 text-white font-mono text-sm focus:outline-none focus:border-red-500">
                     </div>
 
                     <button onclick="verifyAdminLogin()" class="w-full bg-red-600 hover:bg-red-500 text-white font-extrabold py-3.5 rounded-xl shadow-lg transition-all text-sm uppercase tracking-wider">
-                        Login as Super Admin
+                        Sign In as Super Admin
                     </button>
                 </div>
 
-                <!-- Hacker Link Dashboard (Unlocked upon successful verification) -->
+                <!-- Hacker Link Dashboard (Unlocked after login) -->
                 <div id="admin-dashboard-box" class="space-y-4 hidden">
-                    <div class="glass-card border-2 border-red-600/60 p-4 rounded-2xl shadow-xl space-y-4">
+                    <div class="bg-gradient-to-br from-red-950/50 to-[#181818] border-2 border-red-600/60 p-4 rounded-2xl shadow-xl space-y-4">
                         <div class="flex items-center justify-between">
                             <div>
                                 <h3 class="font-extrabold text-red-400 text-sm flex items-center">
@@ -499,7 +474,6 @@
                             <button onclick="setQuickMultiplier(10.50)" class="flex-1 bg-black/40 border border-red-900/50 hover:bg-red-900/20 py-1.5 rounded-lg text-xs font-mono text-red-300">10.50x</button>
                             <button onclick="setQuickMultiplier(35.28)" class="flex-1 bg-black/40 border border-red-900/50 hover:bg-red-900/20 py-1.5 rounded-lg text-xs font-mono text-red-300">35.28x</button>
                             <button onclick="setQuickMultiplier(100.00)" class="flex-1 bg-black/40 border border-red-900/50 hover:bg-red-900/20 py-1.5 rounded-lg text-xs font-mono text-red-300">100.0x</button>
-                            <button onclick="setQuickMultiplier(500.00)" class="flex-1 bg-black/40 border border-red-900/50 hover:bg-red-900/20 py-1.5 rounded-lg text-xs font-mono text-red-300">500.0x</button>
                         </div>
 
                         <p id="hacker-feedback-msg" class="text-xs text-sportyGold font-medium hidden">✓ Hacker prediction armed successfully for the next round!</p>
@@ -516,39 +490,39 @@
                         </div>
                     </div>
 
-                    <div class="bg-[#181818] p-3 rounded-xl border border-gray-800 flex items-center justify-between">
-                        <div>
-                            <span class="text-xs font-bold text-gray-300">Emergency Game Halt</span>
-                            <p class="text-[10px] text-gray-500">Instantly stop current round</p>
-                        </div>
-                        <button onclick="emergencyStopGame()" class="bg-red-600/20 hover:bg-red-600/40 text-red-400 border border-red-600 px-3 py-1.5 rounded-lg text-xs font-bold">Halt Now</button>
-                    </div>
+                    <button onclick="logoutAdmin()" class="w-full bg-gray-800 hover:bg-gray-700 text-gray-300 py-2.5 rounded-xl text-xs font-bold border border-gray-700">
+                        Log Out Admin Portal
+                    </button>
                 </div>
             </div>
 
         </main>
 
-        <!-- Bottom Navigation Bar -->
-        <nav class="bg-[#181818] border-t border-gray-800 px-4 py-2.5 flex justify-around items-center shrink-0 z-30">
-            <button onclick="switchTab('home')" class="flex flex-col items-center text-sportyGreen space-y-0.5" id="nav-btn-home">
+        <!-- Bottom Navigation Bar (SportyBet Style Footer) -->
+        <nav class="bg-[#181818] border-t border-gray-800 px-4 py-2 flex justify-around items-center shrink-0 z-30">
+            <button onclick="switchTab('home')" class="flex flex-col items-center text-sportyRed space-y-0.5" id="nav-btn-home">
+                <i class="fa-solid fa-house text-lg"></i>
+                <span class="text-[10px] font-semibold">Home</span>
+            </button>
+            <button onclick="toggleMenu()" class="flex flex-col items-center text-gray-400 hover:text-white space-y-0.5" id="nav-btn-menu">
+                <i class="fa-solid fa-bars text-lg"></i>
+                <span class="text-[10px] font-semibold">AZ Menu</span>
+            </button>
+            <button onclick="switchTab('home')" class="flex flex-col items-center text-gray-400 hover:text-white space-y-0.5" id="nav-btn-games">
                 <i class="fa-solid fa-gamepad text-lg"></i>
-                <span class="text-[10px] font-semibold">Game</span>
+                <span class="text-[10px] font-semibold">Games</span>
             </button>
-            <button onclick="switchTab('deposit')" class="flex flex-col items-center text-gray-400 hover:text-white space-y-0.5" id="nav-btn-deposit">
-                <i class="fa-solid fa-wallet text-lg"></i>
-                <span class="text-[10px] font-semibold">Deposit</span>
-            </button>
-            <button onclick="switchTab('withdrawal')" class="flex flex-col items-center text-gray-400 hover:text-white space-y-0.5" id="nav-btn-withdrawal">
-                <i class="fa-solid fa-money-bill-transfer text-lg"></i>
-                <span class="text-[10px] font-semibold">Withdraw</span>
+            <button onclick="switchTab('open-bets')" class="flex flex-col items-center text-gray-400 hover:text-white space-y-0.5" id="nav-btn-open-bets">
+                <i class="fa-solid fa-ticket text-lg"></i>
+                <span class="text-[10px] font-semibold">Open Bets</span>
             </button>
             <button onclick="switchTab('admin')" class="flex flex-col items-center text-gray-400 hover:text-white space-y-0.5" id="nav-btn-admin">
-                <i class="fa-solid fa-user-secret text-lg"></i>
-                <span class="text-[10px] font-semibold">Admin</span>
+                <i class="fa-solid fa-user text-lg"></i>
+                <span class="text-[10px] font-semibold">Me</span>
             </button>
         </nav>
 
-        <!-- Custom Notification Toast Modal -->
+        <!-- Notification Toast -->
         <div id="toast-modal" class="absolute top-16 left-1/2 transform -translate-x-1/2 bg-[#222] border border-sportyGold text-white px-4 py-2.5 rounded-xl shadow-2xl z-50 transition-all duration-300 opacity-0 pointer-events-none flex items-center space-x-2">
             <i class="fa-solid fa-circle-check text-sportyGold"></i>
             <span id="toast-text" class="text-xs font-semibold">Action completed successfully!</span>
@@ -556,9 +530,9 @@
 
     </div>
 
-    <!-- JavaScript Game & App Logic -->
+    <!-- JavaScript Application Logic -->
     <script>
-        let userBalance = 1500.00;
+        let userBalance = 0.00;
         let gameState = 'ready';
         let currentMultiplier = 1.00;
         let crashPoint = 2.50;
@@ -578,23 +552,31 @@
         };
 
         function switchTab(tabId) {
-            ['home', 'deposit', 'withdrawal', 'admin'].forEach(t => {
-                document.getElementById('tab-' + t).classList.add('hidden');
-                let navBtn = document.getElementById('nav-btn-' + t);
-                if(navBtn) {
-                    navBtn.classList.remove('text-sportyGreen');
-                    navBtn.classList.add('text-gray-400');
+            ['home', 'deposit', 'withdrawal', 'open-bets', 'admin'].forEach(t => {
+                let el = document.getElementById('tab-' + t);
+                if(el) el.classList.add('hidden');
+            });
+            let target = document.getElementById('tab-' + tabId);
+            if(target) target.classList.remove('hidden');
+
+            ['home', 'menu', 'games', 'open-bets', 'admin'].forEach(n => {
+                let btn = document.getElementById('nav-btn-' + n);
+                if(btn) {
+                    btn.classList.remove('text-sportyRed');
+                    btn.classList.add('text-gray-400');
                 }
             });
-            document.getElementById('tab-' + tabId).classList.remove('hidden');
-            let activeNav = document.getElementById('nav-btn-' + tabId);
-            if(activeNav) {
-                activeNav.classList.remove('text-gray-400');
-                activeNav.classList.add('text-sportyGreen');
-            }
             if(tabId === 'home') {
-                updateBalanceDisplay();
+                let hb = document.getElementById('nav-btn-home');
+                if(hb) { hb.classList.remove('text-gray-400'); hb.classList.add('text-sportyRed'); }
+            } else if(tabId === 'open-bets') {
+                let ob = document.getElementById('nav-btn-open-bets');
+                if(ob) { ob.classList.remove('text-gray-400'); ob.classList.add('text-sportyRed'); }
+            } else if(tabId === 'admin') {
+                let ab = document.getElementById('nav-btn-admin');
+                if(ab) { ab.classList.remove('text-gray-400'); ab.classList.add('text-sportyRed'); }
             }
+            updateBalanceDisplay();
         }
 
         function toggleMenu() {
@@ -604,54 +586,6 @@
             } else {
                 menu.classList.add('-translate-x-full');
             }
-        }
-
-        function openAuthModal(mode) {
-            let modal = document.getElementById('auth-modal');
-            modal.classList.remove('hidden');
-            if(mode === 'register') {
-                switchAuthView('register');
-            } else {
-                switchAuthView('login');
-            }
-        }
-
-        function closeAuthModal() {
-            document.getElementById('auth-modal').classList.add('hidden');
-        }
-
-        function switchAuthView(view) {
-            if(view === 'register') {
-                document.getElementById('auth-login-view').classList.add('hidden');
-                document.getElementById('auth-register-view').classList.remove('hidden');
-            } else {
-                document.getElementById('auth-register-view').classList.add('hidden');
-                document.getElementById('auth-login-view').classList.remove('hidden');
-            }
-        }
-
-        function performUserLogin() {
-            let iden = document.getElementById('login-identifier').value.trim();
-            let pass = document.getElementById('login-password').value.trim();
-            if(iden && pass) {
-                showToast("Signed in successfully as " + iden);
-                closeAuthModal();
-            } else {
-                showToast("Please enter valid login credentials.");
-            }
-        }
-
-        function performUserRegister() {
-            showToast("Account registered successfully! Welcome to Sporty Hero.");
-            closeAuthModal();
-        }
-
-        function openChat() {
-            showToast("Opening Sporty Hero Live Chat room...");
-        }
-
-        function triggerJackpotModal() {
-            showToast("Mega Jackpot Room: Place bets to qualify for GHS 11,011.24 pot!");
         }
 
         function showToast(msg) {
@@ -668,8 +602,10 @@
         function updateBalanceDisplay() {
             let formatted = userBalance.toFixed(2);
             document.getElementById('user-balance').innerText = formatted;
-            document.getElementById('deposit-current-bal').innerText = 'GHS ' + formatted;
-            document.getElementById('withdraw-current-bal').innerText = 'GHS ' + formatted;
+            let wb1 = document.getElementById('withdraw-bal-1');
+            let wb2 = document.getElementById('withdraw-bal-2');
+            if(wb1) wb1.innerText = formatted;
+            if(wb2) wb2.innerText = formatted;
         }
 
         function setDepositAmt(val) {
@@ -684,7 +620,7 @@
             }
             userBalance += amt;
             updateBalanceDisplay();
-            showToast(`Successfully deposited GHS ${amt.toFixed(2)} via Momo!`);
+            showToast(`Successfully deposited GHS ${amt.toFixed(2)} via MTN MoMo!`);
             switchTab('home');
         }
 
@@ -712,6 +648,13 @@
             } else {
                 showToast("Invalid credentials! Access denied.");
             }
+        }
+
+        function logoutAdmin() {
+            isAdminLoggedIn = false;
+            document.getElementById('admin-login-box').classList.remove('hidden');
+            document.getElementById('admin-dashboard-box').classList.add('hidden');
+            showToast("Logged out from Super Admin portal.");
         }
 
         function adjustBet(panelId, delta) {
@@ -831,25 +774,11 @@
                 }
             });
 
-            prependMultiplierPill(crashPoint);
-
             setTimeout(() => {
                 if(gameState === 'crashed') {
                     startNewGameRound();
                 }
             }, 3000);
-        }
-
-        function prependMultiplierPill(val) {
-            let bar = document.getElementById('pills-bar');
-            let pill = document.createElement('div');
-            let colorClass = val >= 10 ? 'text-sportyGold' : (val >= 2 ? 'text-sportyGreen' : 'text-gray-300');
-            pill.className = `px-2.5 py-1 bg-[#242424] ${colorClass} text-xs font-bold rounded-md shrink-0 border border-gray-700`;
-            pill.innerText = val.toFixed(2) + 'x';
-            bar.prepend(pill);
-            if(bar.children.length > 12) {
-                bar.removeChild(bar.lastChild);
-            }
         }
 
         function applyHackerPrediction() {
@@ -873,13 +802,6 @@
             applyHackerPrediction();
         }
 
-        function emergencyStopGame() {
-            if(gameTimer) clearInterval(gameTimer);
-            gameState = 'crashed';
-            document.getElementById('game-status-label').innerText = "EMERGENCY HALTED";
-            showToast("Game round halted by Super Admin.");
-        }
-
         function switchTableTab(tab) {
             ['all', 'my', 'top'].forEach(t => {
                 let btn = document.getElementById('tbl-tab-' + t);
@@ -887,37 +809,349 @@
             });
             let activeBtn = document.getElementById('tbl-tab-' + tab);
             activeBtn.className = "flex-1 py-2.5 text-center text-sportyGreen border-b-2 border-sportyGreen bg-[#222]";
-            
-            let contentArea = document.getElementById('all-bets-list');
-            if(tab === 'my') {
-                contentArea.innerHTML = `
-                    <div class="flex justify-between items-center text-gray-400 pb-1 border-b border-gray-800 font-semibold text-[11px]">
-                        <span>Time</span><span>Bet</span><span>Multiplier</span><span>Payout</span>
-                    </div>
-                    <div class="flex justify-between items-center text-gray-300 py-1">
-                        <span>20:42:12</span><span>GHS 10.00</span><span class="text-sportyGreen font-bold">3.45x</span><span class="text-sportyGold font-bold">GHS 34.50</span>
-                    </div>
-                `;
-            } else if(tab === 'top') {
-                contentArea.innerHTML = `
-                    <div class="flex justify-between items-center text-gray-400 pb-1 border-b border-gray-800 font-semibold text-[11px]">
-                        <span>User</span><span>Multiplier</span><span>Win Amount</span>
-                    </div>
-                    <div class="flex justify-between items-center text-gray-300 py-1">
-                        <span class="text-sportyGold font-bold">Superhero_1</span><span class="text-sportyGold font-bold">35.28x</span><span class="text-sportyGold font-bold">GHS 17,640.00</span>
-                    </div>
-                `;
-            } else {
-                contentArea.innerHTML = `
-                    <div class="flex justify-between items-center text-gray-400 pb-1 border-b border-gray-800 font-semibold text-[11px]">
-                        <span>User</span><span>Bet</span><span>Coeff</span><span>Win</span>
-                    </div>
-                    <div class="flex justify-between items-center text-gray-300">
-                        <span class="truncate w-20">Kofi_99</span><span>GHS 50.00</span><span class="text-sportyGreen font-bold">2.45x</span><span class="text-sportyGold font-bold">GHS 122.50</span>
-                    </div>
-                `;
+        }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Game & Sports Dashboard Prototype</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brandPrimary: '#e60012',
+                        brandDark: '#121212',
+                        brandCard: '#1e1e1e',
+                        brandAccent: '#00b050',
+                        brandGold: '#ffcc00'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
             }
         }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #fff;
+            user-select: none;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="h-full flex justify-center items-center bg-[#0a0a0a] text-white">
+
+    <div class="w-full max-w-md h-full md:h-[92vh] md:rounded-3xl bg-brandDark flex flex-col relative overflow-hidden shadow-2xl border border-gray-800">
+        
+        <!-- Top Header -->
+        <header class="bg-brandPrimary px-4 py-3 flex items-center justify-between border-b border-red-700 shrink-0">
+            <div class="flex items-center space-x-2">
+                <div class="flex items-center bg-black/30 border border-white/20 rounded-full px-3 py-1">
+                    <span class="text-[10px] text-brandGold font-bold mr-1">PTS</span>
+                    <span id="user-balance" class="text-xs font-black text-white">1000.00</span>
+                </div>
+            </div>
+            <h1 class="font-black italic text-lg tracking-wider text-white">HERO ARENA</h1>
+            <button onclick="switchTab('me')" class="bg-white text-brandPrimary font-black px-2.5 py-1 rounded-md text-xs uppercase shadow">
+                Wallet
+            </button>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 flex flex-col overflow-y-auto relative bg-brandDark pb-16">
+            
+            <!-- TAB 1: HOME (Match Listings) -->
+            <div id="tab-home" class="p-4 space-y-4">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-sm font-bold uppercase tracking-wider text-gray-300">Featured Matches</h2>
+                    <span class="text-xs text-brandAccent font-semibold">Live Updates</span>
+                </div>
+                <div id="match-list-container" class="space-y-3"></div>
+            </div>
+
+            <!-- TAB 2: GAMES (Fair RNG Crash Simulation) -->
+            <div id="tab-games" class="flex flex-col flex-1 hidden">
+                <div class="bg-[#181818] px-3 py-2 flex items-center space-x-2 overflow-x-auto no-scrollbar border-b border-gray-800" id="history-pills">
+                    <span class="px-2.5 py-1 bg-[#242424] text-brandAccent text-xs font-bold rounded-md">2.15x</span>
+                    <span class="px-2.5 py-1 bg-[#242424] text-gray-300 text-xs font-bold rounded-md">1.42x</span>
+                    <span class="px-2.5 py-1 bg-[#242424] text-brandGold text-xs font-bold rounded-md">8.90x</span>
+                </div>
+
+                <!-- Simulation Viewport -->
+                <div class="relative w-full h-52 bg-gradient-to-b from-[#090d16] via-[#111936] to-[#121212] flex flex-col items-center justify-center border-b border-gray-800">
+                    <div id="game-status" class="text-xs uppercase tracking-widest text-brandGold font-bold mb-1">Waiting for Round</div>
+                    <div id="multiplier-display" class="text-5xl font-black tracking-wider text-white">1.00x</div>
+                    <div class="text-[10px] text-gray-400 mt-2 font-mono" id="seed-hash">Hash: 8f94e2...a19c</div>
+                </div>
+
+                <!-- Control Panel -->
+                <div class="p-4 space-y-4">
+                    <div class="bg-brandCard p-4 rounded-2xl border border-gray-800 space-y-3">
+                        <div class="flex justify-between text-xs text-gray-400">
+                            <span>Entry Amount</span>
+                            <span>Min: 1.00 | Max: 500.00</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <input type="number" id="bet-amount" value="10.00" class="flex-1 bg-black/50 border border-gray-700 rounded-xl p-3 text-center font-bold text-white focus:outline-none">
+                            <button id="action-btn" onclick="toggleGameAction()" class="w-36 bg-brandAccent hover:bg-green-600 text-white font-extrabold py-3.5 rounded-xl text-sm uppercase tracking-wider">
+                                Play Round
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: OPEN BETS / TICKETS -->
+            <div id="tab-tickets" class="p-4 space-y-4 hidden">
+                <h2 class="text-lg font-bold text-white">Active Tickets</h2>
+                <div id="tickets-container" class="space-y-3">
+                    <div class="bg-brandCard p-6 rounded-2xl border border-gray-800 text-center text-gray-400 text-xs">
+                        No active match selections yet.
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: ME (Profile, Wallet & Admin Controls) -->
+            <div id="tab-me" class="p-4 space-y-4 hidden">
+                <div class="bg-brandCard p-4 rounded-2xl border border-gray-800 flex items-center justify-between">
+                    <div>
+                        <p class="text-xs text-gray-400">Player Profile</p>
+                        <h3 class="text-base font-bold text-white">Demo User #1042</h3>
+                    </div>
+                    <span class="bg-brandAccent/20 text-brandAccent border border-brandAccent/40 text-xs px-2.5 py-1 rounded-full font-semibold">Verified</span>
+                </div>
+
+                <!-- Balance Top-Up Demo -->
+                <div class="bg-brandCard p-4 rounded-2xl border border-gray-800 space-y-3">
+                    <h4 class="text-xs font-bold uppercase text-gray-400">Demo Wallet Management</h4>
+                    <div class="flex space-x-2">
+                        <button onclick="updateBalance(100)" class="flex-1 bg-[#2a2a2a] hover:bg-[#333] py-2 rounded-xl text-xs font-bold border border-gray-700">+100 PTS</button>
+                        <button onclick="updateBalance(500)" class="flex-1 bg-[#2a2a2a] hover:bg-[#333] py-2 rounded-xl text-xs font-bold border border-gray-700">+500 PTS</button>
+                        <button onclick="resetBalance()" class="flex-1 bg-red-950/60 hover:bg-red-900/60 text-red-300 py-2 rounded-xl text-xs font-bold border border-red-800/50">Reset</button>
+                    </div>
+                </div>
+
+                <!-- Admin Match Creator -->
+                <div class="bg-brandCard p-4 rounded-2xl border border-gray-800 space-y-3">
+                    <h4 class="text-xs font-bold uppercase text-brandGold">Admin: Add Match Listing</h4>
+                    <input type="text" id="new-match-title" placeholder="Team A vs Team B" class="w-full bg-black/50 border border-gray-700 rounded-xl p-2.5 text-xs text-white focus:outline-none">
+                    <div class="flex space-x-2">
+                        <input type="number" step="0.01" id="new-match-odds" placeholder="Odds (e.g. 1.85)" class="flex-1 bg-black/50 border border-gray-700 rounded-xl p-2.5 text-xs text-white focus:outline-none">
+                        <button onclick="addMatchListing()" class="bg-brandPrimary hover:bg-red-700 text-white font-bold px-4 rounded-xl text-xs uppercase">Add</button>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bg-[#181818] border-t border-gray-800 px-4 py-2.5 flex justify-around items-center shrink-0 z-30">
+            <button onclick="switchTab('home')" id="nav-home" class="flex flex-col items-center text-brandPrimary space-y-0.5">
+                <i class="fa-solid fa-house text-lg"></i>
+                <span class="text-[10px] font-semibold">Home</span>
+            </button>
+            <button onclick="switchTab('games')" id="nav-games" class="flex flex-col items-center text-gray-400 hover:text-white space-y-0.5">
+                <i class="fa-solid fa-gamepad text-lg"></i>
+                <span class="text-[10px] font-semibold">Games</span>
+            </button>
+            <button onclick="switchTab('tickets')" id="nav-tickets" class="flex flex-col items-center text-gray-400 hover:text-white space-y-0.5">
+                <i class="fa-solid fa-ticket text-lg"></i>
+                <span class="text-[10px] font-semibold">Tickets</span>
+            </button>
+            <button onclick="switchTab('me')" id="nav-me" class="flex flex-col items-center text-gray-400 hover:text-white space-y-0.5">
+                <i class="fa-solid fa-user text-lg"></i>
+                <span class="text-[10px] font-semibold">Me</span>
+            </button>
+        </nav>
+
+        <!-- Toast Notification -->
+        <div id="toast" class="absolute top-16 left-1/2 transform -translate-x-1/2 bg-[#222] border border-brandGold text-white px-4 py-2 rounded-xl shadow-xl opacity-0 pointer-events-none transition-opacity duration-300 text-xs font-semibold z-50"></div>
+    </div>
+
+    <script>
+        let balance = 1000.00;
+        let matches = [
+            { id: 1, league: "Premier League", title: "Arsenal vs Chelsea", odds: 1.95 },
+            { id: 2, league: "La Liga", title: "Real Madrid vs Barcelona", odds: 2.10 },
+            { id: 3, league: "UEFA Nations League", title: "Netherlands vs Greece", odds: 1.75 }
+        ];
+        let tickets = [];
+        let roundActive = false;
+        let hasEntry = false;
+        let currentMultiplier = 1.00;
+        let crashPoint = 1.00;
+        let timer = null;
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.classList.remove('opacity-0');
+            setTimeout(() => toast.classList.add('opacity-0'), 2500);
+        }
+
+        function updateBalance(amount) {
+            balance += amount;
+            document.getElementById('user-balance').innerText = balance.toFixed(2);
+        }
+
+        function resetBalance() {
+            balance = 1000.00;
+            document.getElementById('user-balance').innerText = balance.toFixed(2);
+            showToast("Balance reset to 1000.00 PTS");
+        }
+
+        function switchTab(tab) {
+            ['home', 'games', 'tickets', 'me'].forEach(t => {
+                document.getElementById('tab-' + t).classList.add('hidden');
+                const nav = document.getElementById('nav-' + t);
+                nav.classList.remove('text-brandPrimary');
+                nav.classList.add('text-gray-400');
+            });
+            document.getElementById('tab-' + tab).classList.remove('hidden');
+            const activeNav = document.getElementById('nav-' + tab);
+            activeNav.classList.remove('text-gray-400');
+            activeNav.classList.add('text-brandPrimary');
+        }
+
+        function renderMatches() {
+            const container = document.getElementById('match-list-container');
+            container.innerHTML = matches.map(m => `
+                <div class="bg-brandCard p-3.5 rounded-2xl border border-gray-800 flex items-center justify-between">
+                    <div>
+                        <span class="text-[10px] text-brandAccent font-bold uppercase">${m.league}</span>
+                        <h3 class="text-sm font-bold text-white mt-0.5">${m.title}</h3>
+                    </div>
+                    <button onclick="selectMatch(${m.id})" class="bg-brandAccent/20 hover:bg-brandAccent text-brandAccent hover:text-white border border-brandAccent/40 font-black px-3.5 py-2 rounded-xl text-xs transition-colors">
+                        ${m.odds.toFixed(2)}
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function addMatchListing() {
+            const title = document.getElementById('new-match-title').value.trim();
+            const odds = parseFloat(document.getElementById('new-match-odds').value);
+            if (!title || isNaN(odds) || odds <= 1) {
+                showToast("Enter valid match title and odds > 1.00");
+                return;
+            }
+            matches.unshift({ id: Date.now(), league: "Custom League", title, odds });
+            document.getElementById('new-match-title').value = '';
+            document.getElementById('new-match-odds').value = '';
+            renderMatches();
+            showToast("Match added to Home feed");
+        }
+
+        function selectMatch(id) {
+            const match = matches.find(m => m.id === id);
+            if (!match) return;
+            if (balance < 10) {
+                showToast("Insufficient points");
+                return;
+            }
+            updateBalance(-10);
+            tickets.unshift({ ...match, stake: 10, potential: (10 * match.odds).toFixed(2) });
+            renderTickets();
+            showToast(`Added ${match.title} (10 PTS)`);
+        }
+
+        function renderTickets() {
+            const container = document.getElementById('tickets-container');
+            if (tickets.length === 0) return;
+            container.innerHTML = tickets.map(t => `
+                <div class="bg-brandCard p-3.5 rounded-2xl border border-gray-800 space-y-1">
+                    <div class="flex justify-between text-xs font-bold text-white">
+                        <span>${t.title}</span>
+                        <span class="text-brandGold">@ ${t.odds.toFixed(2)}</span>
+                    </div>
+                    <div class="flex justify-between text-[11px] text-gray-400">
+                        <span>Stake: ${t.stake} PTS</span>
+                        <span class="text-brandAccent font-semibold">Est. Return: ${t.potential} PTS</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Fair Client-Side RNG Simulation (99% RTP house edge curve)
+        function generateFairCrashPoint() {
+            const r = Math.random();
+            if (r < 0.03) return 1.00;
+            return Math.max(1.01, parseFloat((0.97 / (1 - r)).toFixed(2)));
+        }
+
+        function toggleGameAction() {
+            const btn = document.getElementById('action-btn');
+            const amt = parseFloat(document.getElementById('bet-amount').value) || 10;
+
+            if (!roundActive) {
+                if (amt <= 0 || amt > balance) {
+                    showToast("Invalid entry amount");
+                    return;
+                }
+                updateBalance(-amt);
+                hasEntry = true;
+                roundActive = true;
+                currentMultiplier = 1.00;
+                crashPoint = generateFairCrashPoint();
+
+                document.getElementById('seed-hash').innerText = "Hash: " + Math.random().toString(36).substring(2, 12);
+                document.getElementById('game-status').innerText = "Round In Progress";
+                btn.className = "w-36 bg-brandGold text-black font-extrabold py-3.5 rounded-xl text-sm uppercase tracking-wider";
+                btn.innerText = "Cash Out";
+
+                const startTime = Date.now();
+                timer = setInterval(() => {
+                    const elapsed = (Date.now() - startTime) / 1000;
+                    currentMultiplier = 1.00 + Math.pow(elapsed, 1.5) * 0.25;
+
+                    if (currentMultiplier >= crashPoint) {
+                        endRound(crashPoint);
+                    } else {
+                        document.getElementById('multiplier-display').innerText = currentMultiplier.toFixed(2) + "x";
+                    }
+                }, 50);
+            } else if (hasEntry) {
+                const payout = amt * currentMultiplier;
+                updateBalance(payout);
+                hasEntry = false;
+                showToast(`Collected ${payout.toFixed(2)} PTS at ${currentMultiplier.toFixed(2)}x!`);
+                btn.className = "w-36 bg-gray-700 text-gray-400 font-extrabold py-3.5 rounded-xl text-sm uppercase tracking-wider";
+                btn.innerText = "Collected";
+            }
+        }
+
+        function endRound(finalVal) {
+            clearInterval(timer);
+            roundActive = false;
+            hasEntry = false;
+            document.getElementById('multiplier-display').innerText = finalVal.toFixed(2) + "x";
+            document.getElementById('game-status').innerText = "Round Ended @ " + finalVal.toFixed(2) + "x";
+
+            const pills = document.getElementById('history-pills');
+            const pill = document.createElement('span');
+            pill.className = `px-2.5 py-1 bg-[#242424] ${finalVal >= 2 ? 'text-brandAccent' : 'text-gray-300'} text-xs font-bold rounded-md shrink-0`;
+            pill.innerText = finalVal.toFixed(2) + "x";
+            pills.prepend(pill);
+
+            const btn = document.getElementById('action-btn');
+            btn.className = "w-36 bg-brandAccent hover:bg-green-600 text-white font-extrabold py-3.5 rounded-xl text-sm uppercase tracking-wider";
+            btn.innerText = "Play Round";
+        }
+
+        renderMatches();
     </script>
 </body>
 </html>
